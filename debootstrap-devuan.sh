@@ -16,7 +16,8 @@ echo debootstrap devuan
   pwd 
 
  #  debootstrap                    --no-check-gpg     --include=netbase,wpasupplicant  testing   .   http://ftp.debian.org/debian/  
-  PKG="wpasupplicant,netbase,login,passwd"
+
+  PKG="wpasupplicant,netbase,login,tcc,passwd"
  # debootstrap   --no-check-gpg  --include="$PKG" --arch i386 jessie  /target  http://auto.mirror.devuan.org/merged/
 # debootstrap   --no-check-gpg  --include="$PKG" --arch i386 ascii  /target  http://auto.mirror.devuan.org/merged/
   debootstrap   --no-check-gpg  --include="$PKG" --arch i386 ascii  /target  http://be.deb.devuan.org/merged 
