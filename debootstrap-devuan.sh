@@ -17,10 +17,15 @@ echo debootstrap devuan
 
  #  debootstrap                    --no-check-gpg     --include=netbase,wpasupplicant  testing   .   http://ftp.debian.org/debian/  
 
-  PKG="wpasupplicant,netbase,login,tcc,passwd"
- # debootstrap   --no-check-gpg  --include="$PKG" --arch i386 jessie  /target  http://auto.mirror.devuan.org/merged/
+  PKG="wpasupplicant,netbase,tcc,login,passwd"
+  echo ===========================
+  echo ThePackagesList-"$PKG"
+  echo ===========================
+  # debootstrap   --no-check-gpg  --include="$PKG" --arch i386 jessie  /target  http://auto.mirror.devuan.org/merged/
 # debootstrap   --no-check-gpg  --include="$PKG" --arch i386 ascii  /target  http://auto.mirror.devuan.org/merged/
+  echo run-debootstrap-start
   debootstrap   --no-check-gpg  --include="$PKG" --arch i386 ascii  /target  http://be.deb.devuan.org/merged 
+ 
 
   date
   mkdir /target/lib/modules
@@ -34,17 +39,25 @@ echo debootstrap devuan
   cp -v  /etc/network/wifi.conf   /target/etc/network/
 
   echo 
-  cp -v  /usr/local/bin/nconfig   /target/usr/local/bin/ 
+  cp -v  /usr/local/bin/nconfig      /target/usr/local/bin/ 
+  cp -v  /usr/local/bin/nfind      /target/usr/local/bin/ 
+  cp -v  /usr/local/bin/lc           /target/usr/local/bin/ 
+  echo 
 
   echo "" > /target/etc/fstab 
   mv    /target/boot   /target/boot-origin
 
+  cp -v source/base/nconfig.c  /opt/
+
   # cp -a  /boot/   /target/
-  nano /target/etc/shadow
+  # lc should have an editor with --edit  or -e 
+  nano  /target/etc/shadow
   date
 
+
   echo please do place boot and modules now 
-  cp -a /boot/ /target 
+  cp -a -v /boot/ /target 
+  cp -a -v /lib/modules/4.9.0-6-686-pae  /target/lib/modules/
   echo mission completed
 
 exit
