@@ -51,7 +51,11 @@ echo debootstrap devuan
 
   # cp -a  /boot/   /target/
   # lc should have an editor with --edit  or -e 
-  nano  /target/etc/shadow
+  if [ -f /usr/bin/vim ] ; then 
+     vim       /target/etc/shadow
+  else
+     vim.tiny  /target/etc/shadow
+  fi
   date
 
 
